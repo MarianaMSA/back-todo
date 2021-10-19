@@ -1,18 +1,19 @@
 const mongoose = require("mongoose");
 
-const Conn = () => {
-   mongoose
-      .connect("mongodb://localhost:27017/todolist", {
-         useNewUrlParser: true,
-         useUnifiedTopology: true,
-      })
-      .then(() => console.log("MongoDb Connected"))
-      .catch((err) => console.log("Falha na conexão com Mongo DB", err));
-};
+function Conn(url, user, pass, banco){
+    mongoose.connect(`${url}/${banco}`, {
+        user: user,
+        pass: pass,
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    }).then(()=>{
+            console.log('MongoDB Connected');
+    }).catch((err)=>{
+            console.error('Erro ao conectar ao Mongo', err);
+    });
+}
 
-module.exports = Conn;
-
-
+module.exports = Conn; 
 //////const mongoose = require('mongoose');
 
 // const Conn = (url, user, pass, data) => {
